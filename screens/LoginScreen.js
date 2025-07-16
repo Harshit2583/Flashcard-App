@@ -19,17 +19,21 @@ const LoginScreen = ({ navigation, setIsAuthenticated, isAuthenticated }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      if (response.ok) {
+      console.log('Login response:', data); // Debug log
+      if (response.ok && data.token) {
         await AsyncStorage.setItem('token', data.token);
         setIsAuthenticated(true);
-        // No navigation needed; App.js will handle redirect
+        console.log('Login success, token saved'); // Debug log
       } else {
         setError(data.message || 'Login failed');
+        console.log('Login failed:', data.message); // Debug log
       }
     } catch (err) {
       setError('Network error');
+      console.log('Network error:', err); // Debug log
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -59,7 +63,7 @@ const LoginScreen = ({ navigation, setIsAuthenticated, isAuthenticated }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      {error ? <Text style={[styles.error, { fontWeight: 'bold', fontSize: 16 }]}>{error}</Text> : null}
       <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
         <Text style={styles.buttonText}>{loading ? 'Logging in...' : 'Login'}</Text>
       </TouchableOpacity>

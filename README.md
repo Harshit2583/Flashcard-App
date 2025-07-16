@@ -6,8 +6,12 @@ A full-stack Flashcards app built with React Native (frontend) and Node.js/Expre
 
 ## Features
 - User registration and login (JWT authentication)
+▶️ [Watch the full demo video](assets/fc-login.mp4)
 - Create, view, update, and delete flashcards
+▶️ [Watch the full demo video](assets/fc-crud.mp4)
 - Mark cards as completed or important
+▶️ [Watch the full demo video](assets/fc-quiz.mp4)
+
 - Progress tracking
 - Secure backend with MongoDB
 
